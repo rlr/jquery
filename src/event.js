@@ -329,10 +329,12 @@ jQuery.event = {
 		} else if ( !event.isDefaultPrevented() ) {
 			var target = event.target, old,
 				isClick = jQuery.nodeName(target, "a") && type === "click",
+				isScroll = target === window && type === "scroll",
 				special = jQuery.event.special[ type ] || {};
 
 			if ( (!special._default || special._default.call( elem, event ) === false) && 
-				!isClick && !(target && target.nodeName && jQuery.noData[target.nodeName.toLowerCase()]) ) {
+				!isClick && !isScroll &&
+				!(target && target.nodeName && jQuery.noData[target.nodeName.toLowerCase()]) ) {
 
 				try {
 					if ( target[ type ] ) {
